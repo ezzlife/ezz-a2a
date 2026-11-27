@@ -6,24 +6,27 @@ Every number below comes from this repository: `python -m ezz_a2a.demo` output,
 repository is public at https://github.com/ezzlife/ezz-a2a; the link goes in the first
 comment, not in the body.
 
-## Main post (about 700 characters, paste as is)
+## Main post (about 900 characters, paste as is)
 
 Line breaks and symbols are deliberate: LinkedIn shows the text exactly as
 pasted, and short lines are what keep it readable on a phone.
 
 ```text
-⏱️ Your AI agent times out.
-🔪 You kill it.
-🧟 Its children keep running.
+🤔 Your AI agent times out and you kill it. Is it really dead?
 
-On Windows, kill() stops one process, not the tree. I measured it:
+On Windows, probably not. 🧟
 
+📍 The problem
+kill() stops one process, not its children. I measured it with a claude.exe → node → tool tree:
 ❌ Plain kill: 2 of 3 processes still alive
-✅ Job Object: 0 of 3
 
-💡 The fix in ezz-a2a, my A2A agent for Claude Code reviews: a Job Object with KILL_ON_JOB_CLOSE. Timeout, cancel or crash, the whole tree dies. 🔒
+🛠️ The context
+I hit this building ezz-a2a, a small A2A agent that hands code reviews to Claude Code. A review that times out must not leave workers running in the background.
 
-🐛 The gap I almost shipped: with a 20 ms delay, 9 of 10 grandchildren escaped before joining the job. Starting suspended → 0 of 10.
+✅ The solution
+A Windows Job Object with KILL_ON_JOB_CLOSE:
+→ Timeout, cancel or crash: 0 of 3 left alive
+→ The worker starts suspended and joins the job before it runs. Without that, 9 of 10 grandchildren escaped. Now 0 of 10. 🔒
 
 🎯 And the reviews? On a 2018 snapshot of kennethreitz/records: 5 of 5 known bugs found, 0 of 3 false alarms, in 3 of 3 runs.
 
