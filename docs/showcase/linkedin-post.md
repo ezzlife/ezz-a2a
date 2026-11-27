@@ -3,8 +3,8 @@
 Every number below comes from this repository: `python -m ezz_a2a.demo` output,
 `pytest` (250 passed, 4 skipped) and the three recorded runs of
 `cases/records-known-findings` in `evidence/`. Re-run them before posting. The
-repository is public at https://github.com/ezzlife/ezz-a2a; the link goes in the first
-comment, not in the body.
+repository is public at https://github.com/ezzlife/ezz-a2a and the main post links it
+in the body.
 
 ## Main post (about 1,000 characters, paste as is)
 
@@ -55,8 +55,8 @@ false alarms, in 3 runs on a 2018 snapshot of kennethreitz/records.
 
 - Attach `docs/assets/ezz-a2a-flow.png`: the 2 of 3 vs 0 of 3 panels plus the
   5 of 5 results band.
-- Post it as text plus one image. Links in the body lower reach, so put
-  https://github.com/ezzlife/ezz-a2a in the first comment.
+- Post it as text plus one image. The link stays in the body by choice, even
+  though links there are commonly said to lower reach.
 - Reply to early comments within the first hour.
 - Nobody can promise it goes viral. The hook (2 of 3 vs 0 of 3) is what makes
   it worth reading.
