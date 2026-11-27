@@ -43,6 +43,14 @@ Synthetic processes and a real separate server over localhost. The gate is
 `scripts/pre-push.sh` on Windows, so the Job Object tests execute instead of
 skipping. 250 tests pass, 4 skip.
 
+**Does the review find real bugs?**
+`cases/records-known-findings` is `records.py` from kennethreitz/records at its
+February 2018 state: five bugs that upstream fixed or reported later, and three
+plausible false ones. In 3 of 3 Sonnet runs it found 5 of 5 and flagged 0 of 3
+(`evidence/records-known-findings-run-*.json`, pinned by `tests/review/test_scoring.py`).
+The answer key comes from the project's own history, not from me. Limit: an old,
+popular repository may be in the model's training data, fixes included.
+
 **How do you protect secrets?**
 `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN` and the server's own `A2A_TOKEN` are
 removed from the worker environment; alternative providers are rejected;
@@ -61,7 +69,7 @@ So a script can tell apart "review failed", "bad input, nothing sent",
 
 **How was it reviewed?**
 By other models: Sonnet, Fable and Codex reviewed the code, and the main
-session decided which findings to accept.Say plainly that the model reviews are input, not proof.
+session decided which findings to accept. Say plainly that the model reviews are input, not proof.
 
 ## Honest limits to volunteer
 
