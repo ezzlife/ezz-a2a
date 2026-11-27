@@ -1,0 +1,15 @@
+{
+  "id": "records-known-findings",
+  "objective": "Find concrete defects in records.py: how RecordCollection iterates and slices rows, how Database opens connections and transactions, and how the command-line interface parses arguments and prints exports. Only report issues you can support from the provided code, and mark anything you cannot verify as unverified. Do not implement changes.",
+  "base_commit": "f2c5307d76e7909e7b0476e0b004590486ebdf37",
+  "dependencies": [],
+  "files": [
+    "records.py"
+  ],
+  "acceptance": [
+    "Findings are listed by severity with file and line",
+    "Each finding states a concrete failing input and the code path that reaches it",
+    "Unverifiable claims are labelled as such"
+  ],
+  "checks": []
+}

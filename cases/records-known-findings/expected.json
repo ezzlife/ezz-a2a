@@ -1,0 +1,37 @@
+{
+  "repository": "https://github.com/kennethreitz/records",
+  "base_commit": "f2c5307d76e7909e7b0476e0b004590486ebdf37",
+  "real": [
+    {"id": "R1", "file": "records.py", "lines": "149",
+     "summary": "an open-ended slice such as rows[2:] evaluates len(self) < None before the None check and raises TypeError on Python 3",
+     "evidence": "fixed upstream in d47f7b8 (2018-06-17, 'fix records.RecordCollection slicing bug')",
+     "anchors": [["slice|slicing|\\[\\d*:\\]|key\\.stop|stop is none"], ["typeerror|none|not supported|comparison|order of"]]},
+    {"id": "R2", "file": "records.py", "lines": "314-315,326-327",
+     "summary": "Database.query and query_file return a lazy RecordCollection from inside 'with self.get_connection()', so the connection closes before the rows are read",
+     "evidence": "upstream issue #149 ('Cannot operate on a closed database'), fixed by PR #190 (ee04fb2, close_with_result)",
+     "anchors": [["clos"], ["lazy|before .{0,40}(read|consum|iterat|fetch)|pending|generator|not (yet )?(read|consumed|fetched)|fetchall"]]},
+    {"id": "R3", "file": "records.py", "lines": "344-345",
+     "summary": "Database.transaction rolls back in a bare except and never re-raises, so a failing block looks successful to the caller",
+     "evidence": "upstream PR #230 (a1ebdde, 'Fix transaction context manager to re-raise exceptions after rollback')",
+     "anchors": [["transaction|rollback"], ["swallow|re-?rais|silent|suppress|never rais|not rais|without rais|hides|lost"]]},
+    {"id": "R4", "file": "records.py", "lines": "513-514",
+     "summary": "the CLI prints binary exports (xls, xlsx, dbf, ods) with print(), so Python 3 writes the b'...' repr instead of the file bytes",
+     "evidence": "upstream issue #78 ('cli output to .xls format is cast to a string in Python 3'), fixed in 598af0d",
+     "anchors": [["xls|binary|bytes|dbf|ods"], ["print|repr|b'|str\\(|stdout"]]},
+    {"id": "R5", "file": "records.py", "lines": "481,513-514",
+     "summary": "the CLI never validates <format>: supported_formats is unused and a key=value parameter given without a format is taken as the format",
+     "evidence": "upstream issue #133 ('It is impossible to give [<params>] without give [<format>]'), fixed in d3ba852",
+     "anchors": [["format"], ["supported_formats|key=value|<params>|params|unsupported|not validat|never validat|unused|invalid"]]}
+  ],
+  "false": [
+    {"id": "F1", "file": "records.py", "lines": "377",
+     "summary": "claims Connection.query is open to SQL injection; the query is the caller's SQL by design and values are bound through **params",
+     "anchors": [["sql injection|injectable"]]},
+    {"id": "F2", "file": "records.py", "lines": "121-127",
+     "summary": "claims __iter__ lets StopIteration escape the generator (PEP 479); it is caught at line 126 and turned into return",
+     "anchors": [["stopiteration|pep 479|pep-0479"], ["__iter__|generator|runtimeerror|bubbl|escape|leak"]]},
+    {"id": "F3", "file": "records.py", "lines": "240-250",
+     "summary": "claims one() returns the first row without checking for a second; it reads self[1] and raises ValueError",
+     "anchors": [["one\\(\\)|\\.one\\b|def one"], ["second|more than one|only (the )?first|never check|does not check|doesn't check|without check"]]}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "self-review",
+  "objective": "Find concrete defects in how the worker runs Claude and contains its process tree; do not implement changes.",
+  "base_commit": "HEAD",
+  "dependencies": [],
+  "files": [
+    "ezz_a2a/claude/runner.py",
+    "ezz_a2a/claude/windows_job.py",
+    "ezz_a2a/worker/executor.py",
+    "ezz_a2a/review/cli.py"
+  ],
+  "acceptance": [
+    "Findings are listed by severity with file and line",
+    "Claude is only invoked when explicitly enabled",
+    "Failures and timeouts are never reported as success"
+  ],
+  "checks": []
+}
