@@ -6,44 +6,33 @@ Every number below comes from this repository: `python -m ezz_a2a.demo` output,
 repository is public at https://github.com/ezzlife/ezz-a2a; the link goes in the first
 comment, not in the body.
 
-## Main post (about 1,800 characters)
+## Main post (about 700 characters, paste as is)
 
-Your AI agent times out. You kill the process. Its children keep running.
+Line breaks and symbols are deliberate: LinkedIn shows the text exactly as
+pasted, and short lines are what keep it readable on a phone.
 
-On Windows, `kill()` stops one process, not its tree. I measured it with a
-three-level stand-in for claude.exe -> node -> tool:
+```text
+⏱️ Your AI agent times out.
+🔪 You kill it.
+🧟 Its children keep running.
 
-- plain kill of the root: 2 of 3 processes still running
-- Job Object terminate: 0 of 3
+On Windows, kill() stops one process, not the tree. I measured it:
 
-I hit this building a small A2A agent that hands a code review to Claude Code
-over localhost. The fix is a Windows Job Object with KILL_ON_JOB_CLOSE: the
-timeout, a cancellation and even a crash of the server end the whole tree. If
-the job cannot be created, the request fails instead of running uncontained.
+❌ Plain kill: 2 of 3 processes still alive
+✅ Job Object: 0 of 3
 
-Three more decisions I would defend in a design review:
+💡 The fix in ezz-a2a, my A2A agent for Claude Code reviews: a Job Object with KILL_ON_JOB_CLOSE. Timeout, cancel or crash, the whole tree dies. 🔒
 
-1. The server binds port 0 and announces the port it got, so there is no
-   "pick a free port, then hope" race and the bearer token only reaches the
-   right process.
-2. Evidence (task, SHA-256 of every source, model, timestamps, response) is
-   written before anything is printed and never overwrites a file, so a closed
-   console cannot lose a paid answer.
-3. 250 tests run on Windows without a single real model call.
+🐛 The gap I almost shipped: with a 20 ms delay, 9 of 10 grandchildren escaped before joining the job. Starting suspended → 0 of 10.
 
-Does the review itself work? I took records.py from kennethreitz/records as it
-was in February 2018, when it still had five bugs that were fixed upstream
-later, plus three plausible-looking false ones. In 3 of 3 runs with Claude
-Sonnet it found all 5 real bugs and flagged none of the 3 false ones. One
-caveat: an old, popular repository may be in the model's training data.
+🎯 And the reviews? On a 2018 snapshot of kennethreitz/records: 5 of 5 known bugs found, 0 of 3 false alarms, in 3 of 3 runs.
 
-The gap I almost shipped: the worker ran for a moment before joining the job.
-With the event loop held for 20 ms, 9 of 10 grandchildren escaped. Now it starts
-suspended, joins the job, then resumes: 0 of 10.
+💬 What's the nastiest "dead but not really" bug you've met?
 
-What is the nastiest "the process is dead but not really" bug you have met?
+👇 Code in the first comment
 
-#Python #Windows #AIAgents #A2A #SoftwareEngineering
+#Python #Windows #AIAgents #SoftwareEngineering
+```
 
 ## Short version (about 600 characters)
 
