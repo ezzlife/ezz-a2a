@@ -6,7 +6,7 @@ Every number below comes from this repository: `python -m ezz_a2a.demo` output,
 repository is public at https://github.com/ezzlife/ezz-a2a; the link goes in the first
 comment, not in the body.
 
-## Main post (about 900 characters, paste as is)
+## Main post (about 1,000 characters, paste as is)
 
 Line breaks and symbols are deliberate: LinkedIn shows the text exactly as
 pasted, and short lines are what keep it readable on a phone.
@@ -32,7 +32,7 @@ A Windows Job Object with KILL_ON_JOB_CLOSE:
 
 💬 What's the nastiest "dead but not really" bug you've met?
 
-👇 Code in the first comment
+💻 Code and recorded runs: https://github.com/ezzlife/ezz-a2a
 
 #Python #Windows #AIAgents #SoftwareEngineering
 ```
